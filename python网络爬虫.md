@@ -31,3 +31,15 @@ form urllib.request import urlopen
 html = urlopen("http://pythonscraping.com/pages/page1/html")
 print(html.read())
 ###你可以把这段代码保存为scarpetest.py然后在你的终端通过如下命令运行：
+$pythob scrapetest.py
+###此时要注意如果你的机器上安装了Python2.X版本，你需要通过下面的命令显视地调用Python3.X版本：
+$python3 scrapetest.py
+###这段代码运行之后会输出网页完整的HTML编码。或者更准确地讲，输出的是HTML文件page1.html（来自路径<web root>/pages,被存放在主域名http://pythonscraping.com的服务器上）。
+###有什么区别吗？大多是现代网页有很多源文件相关联。这些源文件可以是图片，JavaScript文件，CSS文件或者其他你请求连接到的内容。当浏览器加载到一个标签例如<img scr="cuteKitten.jpg">,浏览器此时就知道需要向服务器发送另一个请求来获得文件cuteKitten.jpg的数据，以此来加载完整的页面给用户。读者要知道，Python脚本并不能逆向运行和同时请求多个文件（至少现在不行）；它只能读取我们请求的单个HTML文件。
+###所以这个过程是怎么实现的呢？多亏了Python接近英语的语法特性，第一行
+from urllib.request import urlopen
+###就跟它字面上的意思一样：从Python的request模块中导入唯一的函数urlopen
+####urllib还是urllib2?
+####如果你在python2.X版本中使用过urllib2库，你也许已经注意到两者的不同了。在python3.X中，urllib2被重新命名为urllib并且拆分成了几个子模块：urllib.request，urllib.parse,urllib.error。尽管函数名字基本上保持原样，当使用新的uirlib库时你也得注意这些函数已经被移到子库里了。
+###urllib是Python标准库之一（意味着你不需要安装额外的东西就可以安装这个例子），它包含通过互联网请求数据的函数，处理cookies,甚至交换标头和你用户代理的元数据。整本书我们都会一直使用urllib,所以我们强烈推荐你阅读python的官方文档。
+###urlopen是用来穿过网络打开一个远程对象并且读取对象内容的函数。因为它是一个一般性的库（它能轻易读取HTML文件，图像文件或者其他文件流），本书中我们也会经常使用到它。
